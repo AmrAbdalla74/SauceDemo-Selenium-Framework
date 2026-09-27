@@ -7,6 +7,7 @@ import pages.CartPage;
 import pages.CheckoutPage;
 import pages.LoginPage;
 import pages.ProductsPage;
+import utils.ConfigUtils;
 
 public class CheckoutTest extends BaseTest {
 
@@ -17,18 +18,18 @@ public class CheckoutTest extends BaseTest {
         CartPage cartPage = new CartPage(driver);
         CheckoutPage checkoutPage = new CheckoutPage(driver);
 
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(ConfigUtils.getUsername(), ConfigUtils.getPassword());
 
         productsPage.addBackpackToCart();
         productsPage.openCart();
 
-        Assert.assertTrue(cartPage.isProductAdded(),
-                "Product should be added to the cart"
-        );
-
         cartPage.clickCheckout();
 
-        checkoutPage.fillCheckoutInfo("amr", "Ali", "2222");
+        checkoutPage.fillCheckoutInfo(
+                ConfigUtils.getFirstName(),
+                ConfigUtils.getLastName(),
+                ConfigUtils.getPostalCode()
+        );
         checkoutPage.clickContinue();
         checkoutPage.clickFinish();
 

@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import factory.DriverFactory;
+import utils.ConfigReader;
+import utils.ConfigUtils;
 
 public class BaseTest {
     protected WebDriver driver;
@@ -14,7 +16,8 @@ public class BaseTest {
         String browser = System.getProperty("browser", "chrome");
         driver = DriverFactory.createDriver(browser);
         //we use Get method to open saucedemo web
-        driver.get("https://www.saucedemo.com/");
+        ConfigReader.loadProperties();
+        driver.get(ConfigUtils.getUrl());
     }
 
     @AfterMethod

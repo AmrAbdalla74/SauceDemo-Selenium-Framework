@@ -5,6 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import pages.ProductsPage;
+import utils.ConfigUtils;
 
 public class LoginTest extends BaseTest {
 
@@ -13,7 +14,7 @@ public class LoginTest extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         ProductsPage productsPage = new ProductsPage(driver);
 
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(ConfigUtils.getUsername(), ConfigUtils.getPassword());
         Assert.assertTrue(productsPage.isProductsPageDisplayed(),
                 "Products page should be displayed after successful login");
     }
